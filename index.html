@@ -113,13 +113,13 @@ const qrCodeSuccessCallback = (decodedText, decodedResult) => {
 
   if(decodedText.includes('ktcn')){
   if(decodedText.includes('vattu')){
-    const productName = document.getElementById("productName");
-    productName.value = decodedText.split("/")[2]
+    const maVatTu = document.getElementById("maVatTu");
+    maVatTu.value = decodedText.split("/")[2]
     var msg = 'vật tư'
   }else if(decodedText.includes('khonho')) {
-      const productCode = document.getElementById("productCode");
-      productCode.value = decodedText.split("/")[2]
-      var msg = 'kho'
+      const viTri = document.getElementById("viTri");
+      viTri.value = decodedText.split("/")[2]
+      var msg = 'vị trí'
   }
 } else {
   resultContainer.innerHTML = '<div class="input-group-text bg-primary text-white">Mã QR không hợp lệ!</div>';
