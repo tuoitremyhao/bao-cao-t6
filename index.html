@@ -94,14 +94,16 @@
   function handleFormSubmit() {
     // Get the QR data from the div
     const formObject = document.getElementById("InventoryForm");
-    fetch(`https://script.google.com/macros/s/AKfycbyta3gVn127LP0YfdTT_MQK3rCzaDIT6Bg60XgfdH85F9aO_FyLIyvYbjs8yn9ouZA7ZQ/exec`, {
+    fetch(`https://script.google.com/macros/s/AKfycbwLMfMgRAvFmGNjO9Vlfre2bCF3Ka67pZDLn9fHUs4kK5D4g8dnwT6iF6aA5dCxUpRktQ/exec`, {
                   method : 'POST',
                   header : {'Content-Type': 'application/json'},
                   body : `{"vitri" : "${formObject.viTri.value}",
                           "mavattu" : "${formObject.maVatTu.value}",
                           "loaivattu" : "${formObject.loaiVatTu.value}",
                           "quantity" : "${formObject.quantity.value}",
-                          "batch" : "${formObject.batch.value}"
+                          "batch" : "${formObject.batch.value}",
+                          "chat_id" : "${telegram.id}",
+                          "action" : "import"
                           }`
                   });
     document.getElementById("InventoryForm").reset();
