@@ -36,7 +36,7 @@
 <div id="qr-reader" class="mt-4" style="position: relative; padding: 0px; border: none;"></div>
 <div id="qr-reader-results"></div>
 <br>
-<form id="InventoryForm">
+<form id="InventoryForm" onsubmit="handleFormSubmit(this)">
   <button id="start-qr-button" class="btn btn-primary mb-3 w-100">Quét QR</button>
   <div class="mb-3 input-group">
     <button id="qr-button" class="input-group-text bg-primary text-white"><i class="bi bi-qr-code-scan"></i></button>
@@ -90,11 +90,11 @@
     fetch(`https://script.google.com/macros/s/AKfycbyta3gVn127LP0YfdTT_MQK3rCzaDIT6Bg60XgfdH85F9aO_FyLIyvYbjs8yn9ouZA7ZQ/exec`, {
                   method : 'POST',
                   header : {'Content-Type': 'application/json'},
-                  body : `{"vitri" : "${formObject.viTri}",
-                          "mavattu" : "${formObject.maVatTu}",
-                          "loaivattu" : "${formObject.loaiVatTu}",
-                          "quantity" : "${formObject.quantity}",
-                          "batch" : "${formObject.batch}"
+                  body : `{"vitri" : "${formObject.viTri.value}",
+                          "mavattu" : "${formObject.maVatTu.value}",
+                          "loaivattu" : "${formObject.loaiVatTu.value}",
+                          "quantity" : "${formObject.quantity.value}",
+                          "batch" : "${formObject.batch.value}"
                           }`
                   });
     document.getElementById("InventoryForm").reset();
