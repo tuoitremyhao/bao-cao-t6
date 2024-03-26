@@ -40,31 +40,29 @@
   <button id="start-qr-button" class="btn btn-primary mb-3 w-100">Quét QR</button>
   <div class="mb-3 input-group">
     <button id="qr-button" class="input-group-text bg-primary text-white"><i class="bi bi-qr-code-scan"></i></button>
-    <input type="text" class="form-control" id="productCode" name="productCode" placeholder="Scan QR/Bar Code" readonly>
+    <input type="text" class="form-control" id="viTri" name="viTri" placeholder="Nhập mã vị trí" readonly>
   </div>
 
   <div class="mb-3 input-group">
     <button id="qr2-button" class="input-group-text bg-primary text-white"><i class="bi bi-qr-code-scan"></i></button>
-    <input type="text" class="form-control" id="productName" name="product_name" placeholder="Enter product name">
+    <input type="text" class="form-control" id="maVatTu" name="maVatTu" placeholder="Nhập loại vật tư">
   </div>
   <div class="mb-3 input-group">
     <!-- <label for="productCategory" class="form-label">Product Category:</label> -->
     <span class="input-group-text bg-primary text-white"><i class="bi bi-tags-fill"></i></span>
-    <select class="form-select" id="productCategory" name="product_category">
-          <option disabled selected>Choose Category</option>
-          <option value="electronics">Electronics</option>
-          <option value="clothing">Clothing</option>
-          <option value="books">Books</option>
-          <option value="other">Other</option>
+    <select class="form-select" id="loaiVatTu" name="loaiVatTu">
+          <option disabled selected>Loại vật tư</option>
+          <option value="Cửa cuốn">Cửa cuốn</option>
+          <option value="Nhôm hệ">Nhôm hệ</option>
         </select>
   </div>
   <div class="mb-3 input-group">
     <span class="input-group-text bg-primary text-white"><i class="bi bi-123"></i></span>
-    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity">
+    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Nhập số lượng">
   </div>
   <div class="mb-3 input-group">
     <span class="input-group-text bg-primary text-white"><i class="bi bi-currency-dollar"></i></span>
-    <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Enter price">
+    <input type="number" step="0.01" class="form-control" id="batch" name="batch" placeholder="Nhập batch">
   </div>
   <button type="submit" class="btn btn-primary mb-3 w-100">Submit</button>
 </form>
@@ -89,11 +87,14 @@
   
   function handleFormSubmit(formObject) {
     // Get the QR data from the div
-    fetch(`https://script.google.com/macros/s/AKfycbx9Lk4oLvVWkBgc9Q33OxNzjYVB1GCQu3dw-2V21tjheKEBA_vsjATppIthkLihqSYAVA/exec`, {
+    fetch(`https://script.google.com/macros/s/AKfycbyta3gVn127LP0YfdTT_MQK3rCzaDIT6Bg60XgfdH85F9aO_FyLIyvYbjs8yn9ouZA7ZQ/exec`, {
                   method : 'POST',
                   header : {'Content-Type': 'application/json'},
-                  body : `{"vitri" : "${formObject.productCode}",
-                          "vattu" : "${formObject.productName}"
+                  body : `{"vitri" : "${formObject.viTri}",
+                          "mavattu" : "${formObject.maVatTu}",
+                          "loaivattu" : "${formObject.loaiVatTu}",
+                          "quantity" : "${formObject.quantity}",
+                          "batch" : "${formObject.batch}"
                           }`
                   });
     document.getElementById("InventoryForm").reset();
