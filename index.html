@@ -122,15 +122,15 @@ const qrCodeSuccessCallback = (decodedText, decodedResult) => {
       viTri.value = decodedText.split("/")[2]
       var msg = 'vị trí'
   }
+    html5QrCode.pause();
+    const choice = window.confirm(`Đã thêm ${msg} xong! Bạn có muốn tiếp tục?`);
+    if(choice != true){
+    html5QrCode.stop();
+    }else{
+    html5QrCode.resume();  
+    }
 } else {
   alert(`Mã QR không hợp lê!`);
-}
-html5QrCode.pause();
-const choice = window.confirm(`Đã thêm ${msg} xong! Bạn có muốn tiếp tục?`);
-if(choice != true){
-html5QrCode.stop();
-}else{
-html5QrCode.resume();  
 }
 
 };
