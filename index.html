@@ -39,7 +39,7 @@
 <form id="InventoryForm" onsubmit="handleFormSubmit(this)">
   <button id="start-qr-button" class="btn btn-primary mb-3 w-100">Quét QR</button>
   <div class="mb-3 input-group">
-    <button id="qr-button" class="input-group-text bg-primary text-white"><i class="bi bi-qr-code-scan"></i></button>
+    <button id="qr-button" class="input-group-text bg-primary text-white"><i class="bi bi-map"></i></button>
     <input type="text" class="form-control" id="viTri" name="viTri" placeholder="Nhập mã vị trí" readonly>
   </div>
 
@@ -47,6 +47,7 @@
     <button id="qr2-button" class="input-group-text bg-primary text-white"><i class="bi bi-qr-code-scan"></i></button>
     <input type="text" class="form-control" id="maVatTu" name="maVatTu" placeholder="Nhập loại vật tư" required>
   </div>
+  <!--
   <div class="mb-3 input-group">
     <!-- <label for="productCategory" class="form-label">Product Category:</label> -->
     <span class="input-group-text bg-primary text-white"><i class="bi bi-tags-fill"></i></span>
@@ -56,13 +57,18 @@
           <option value="Nhôm hệ">Nhôm hệ</option>
         </select>
   </div>
+  -->
+    <div class="mb-3 input-group">
+    <button id="qr2-button" class="input-group-text bg-primary text-white"><i class="bi bi-rulers"></i></button>
+    <input type="text" class="form-control" id="dvt" name="dvt" placeholder="Đơn vị tính" required>
+  </div>
   <div class="mb-3 input-group">
     <span class="input-group-text bg-primary text-white"><i class="bi bi-123"></i></span>
     <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Nhập số lượng" required>
   </div>
   <div class="mb-3 input-group">
-    <span class="input-group-text bg-primary text-white"><i class="bi bi-currency-dollar"></i></span>
-    <input type="number" step="0.01" class="form-control" id="ghichu" name="ghichu" placeholder="Ghi chú">
+    <span class="input-group-text bg-primary text-white"><i class="bi bi-pencil"></i></span>
+    <input type="text" class="form-control" id="ghichu" name="ghichu" placeholder="Ghi chú">
   </div>
   <button type="submit" class="btn btn-primary mb-3 w-100">Submit</button>
 </form>
@@ -101,7 +107,7 @@
                           "mavattu" : "${formObject.maVatTu.value}",
                           "loaivattu" : "${formObject.loaiVatTu.value}",
                           "quantity" : "${formObject.quantity.value}",
-                          "batch" : "${formObject.ghichu.value}",
+                          "ghichu" : "${formObject.ghichu.value}",
                           "chat_id" : "${telegram.id}",
                           "action" : "import"
                           }`
