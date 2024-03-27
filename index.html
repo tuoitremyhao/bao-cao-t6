@@ -29,7 +29,7 @@
 <body class="bg-dark text-light">
   <nav class="navbar sticky-top navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand mx-auto" href="#"><span><i class="bi bi-card-checklist"></i></span> Inventory Form</a>
+      <a class="navbar-brand mx-auto" href="#"><span><i class="bi bi-card-checklist"></i></span> Nhập Kho</a>
     </div>
   </nav>
   <div class="container">
@@ -99,6 +99,8 @@
   
   function handleFormSubmit(formObject) {
     // Get the QR data from the div
+    const cfm = window.comfirm(`Bạn có muốn nhập ${formObject.maVatTu.value} vào vị trí ${formObject.viTri.value}`);
+    if(cfm){
     fetch(`https://script.google.com/macros/s/AKfycby-FtNdVtk25Ya2NHS8T1XQkTKt1B-g_Ch5UDrMloxOjgRaQJnpCfkKNmlPxMTsw6iSfA/exec`, {
                   method : 'POST',
                   header : {'Content-Type': 'application/json'},
@@ -111,11 +113,10 @@
                           "action" : "import"
                           }`
                   });
+    } else {
+      window.Telegram.WebApp.close();
+    } 
     document.getElementById("InventoryForm").reset();
-    const cfm = window.comfirm(`Bạn có muốn tiếp tục nhập!`);
-    if(cfm != true){
-    window.Telegram.WebApp.close();
-    }
   }
 </script>
   
