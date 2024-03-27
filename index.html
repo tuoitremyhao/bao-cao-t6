@@ -112,7 +112,7 @@
                           }`
                   });
     document.getElementById("InventoryForm").reset();
-    const cfm = comfirm(`Bạn có muốn tiếp tục nhập!`);
+    const cfm = window.comfirm(`Bạn có muốn tiếp tục nhập!`);
     if(cfm != true){
     window.Telegram.WebApp.close();
     }
@@ -157,12 +157,7 @@ const config = { fps: 10, qrbox: { width: 250, height: 250 } };
 
 document.getElementById('start-qr-button').addEventListener('click', () => {
   html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback); 
-});
-   
-      
-document.getElementById('submit-button').addEventListener('click', () => {
-      handleFormSubmit();
-});    
+});   
 
 </script>
 
