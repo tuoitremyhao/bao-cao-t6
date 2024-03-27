@@ -99,7 +99,9 @@
   
   function handleFormSubmit(formObject) {
     // Get the QR data from the div
-    fetch(`https://script.google.com/macros/s/AKfycby-FtNdVtk25Ya2NHS8T1XQkTKt1B-g_Ch5UDrMloxOjgRaQJnpCfkKNmlPxMTsw6iSfA/exec`, {
+    const tieptuc = window.comfirm(`Bạn có muốn tiếp tục nhập kho!`);
+    if(tieptuc){
+    fetch(`https://script.google.com/macros/s/AKfycbxOqb2IesywHznps0SZ_OPvw41Swoj-gbUnMeJyEvEIpDtCTAgRM39je9CZrw_Rwe8Few/exec`, {
                   method : 'POST',
                   header : {'Content-Type': 'application/json'},
                   body : `{"vitri" : "${formObject.viTri.value}",
@@ -112,8 +114,7 @@
                           }`
                   });
     document.getElementById("InventoryForm").reset();
-    const cfm = window.comfirm(`Bạn có muốn tiếp tục nhập!`);
-    if(cfm != true){
+    } else if{
     window.Telegram.WebApp.close();
     }
   }
