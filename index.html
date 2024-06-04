@@ -67,7 +67,12 @@
           mimeType: file.type,
           bytes: [...new Int8Array(e.target.result)]
         };
-        google.script.run.saveFile(stt,obj);
+
+    fetch(`https://script.google.com/macros/s/AKfycbxOqb2IesywHznps0SZ_OPvw41Swoj-gbUnMeJyEvEIpDtCTAgRM39je9CZrw_Rwe8Few/exec`, {
+                  method : 'POST',
+                  header : {'Content-Type': 'application/json'},
+                  body : obj
+                  });
       };
       fr.readAsArrayBuffer(file);
     }
