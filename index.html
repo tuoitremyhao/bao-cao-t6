@@ -23,11 +23,6 @@
     <form class="row g-3" id="myForm" onsubmit="submitForm(this)">
       <h4 class="text-primary text-center">APP CHECK KHUNG TRỤC</h4>
 
-        <div class="col-md-4 offset-md-4">
-        <label for="teleid" class="form-label">Telegram</label>
-        <input type="text" class="form-control" id="teleid" name="teleid" readonly>
-      </div>
-
       <div class="col-md-4 offset-md-4">
         <label for="madonhang" class="form-label">Mã đơn hàng</label>
         <input type="text" class="form-control" id="madonhang" name="madonhang" required>
@@ -46,6 +41,11 @@
       <div class="col-md-4 offset-md-4">
         <label for="formFile" class="form-label">Tệp đính kèm</label>
         <input id="file" multiple class="form-control" type="file" onchange="saveFile(this)" required/>
+      </div>
+
+      <div class="col-md-4 offset-md-4">
+        <label for="ghichu" class="form-label">Dài khung</label>
+        <input type="text" class="form-control" id="ghichu" name="ghichu" >
       </div>
 
       <div class="col-md-4 offset-md-4">
@@ -85,20 +85,21 @@
       }
     }
 
-    function submitForm(obj){
-        event.preventDefault()
-        Swal.fire({title:"loading.."})
-        Swal.showLoading()
-        google.script.run.withSuccessHandler(()=>{
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Dữ liệu được ghi thành công!",
-            showConfirmButton: false,
-            timer: 1500
-          });
-          //document.getElementById('myForm').reset()
-        }).saveData(obj);
+    function submitForm(formObject){
+    fetch(`https://script.google.com/macros/s/AKfycbyxk9qrTthKZTXJAG_EJv7uyqvtSVGSEqYFlN-XSGlDnZW7IW3vkLYv_aRwJSLqDztt4w/exec`, {
+                  method : 'POST',
+                  header : {'Content-Type': 'application/json'},
+                  body : `{"madonhang" : "${formObject.madonhang.value}",
+                          "daikhung" : "${formObject.daikhung.value}",
+                          "caokhung" : "${formObject.caokhung.value}",
+                          "saukhung" : "${formObject.saukhung.value}",
+                          "ghichu" : "${formObject.ghichu.value}",
+                          "chat_id" : "${telegram.id}",
+                          }`
+                  });
+    document.getElementById("myForm").reset();
+    window.alert("Dữ liệu đang gửi lên hệ thống")
+    window.Telegram.WebApp.close
     }
 
   </script>
