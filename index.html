@@ -60,7 +60,12 @@
   </div>
 
   <script>
-  
+
+            //telegram
+    const tg = window.Telegram.WebApp.initData;
+    var tgdata = decodeURIComponent(tg.split('&')[1].substring(5));
+    var telegram = JSON.parse(tgdata);
+    
  function saveFile(f) {
       for(i=0; i<f.files.length; i++){
       const file = f.files[i];
@@ -85,10 +90,6 @@
     }
 
     function submitForm(formObject){
-            //telegram
-    const tg = window.Telegram.WebApp.initData;
-    var tgdata = decodeURIComponent(tg.split('&')[1].substring(5));
-    var telegram = JSON.parse(tgdata);
     fetch(`https://script.google.com/macros/s/AKfycbyxk9qrTthKZTXJAG_EJv7uyqvtSVGSEqYFlN-XSGlDnZW7IW3vkLYv_aRwJSLqDztt4w/exec`, {
                   method : 'POST',
                   header : {'Content-Type': 'application/json'},
@@ -107,7 +108,6 @@
 
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
