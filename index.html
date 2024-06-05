@@ -61,22 +61,24 @@
       for(i=0; i<f.files.length; i++){
       const file = f.files[i];
       const fr = new FileReader();
-      fr.onload = function (e) {
-        const obj = {
-          filename: file.name,
-          mimeType: file.type,
-          bytes: [...new Int8Array(e.target.result)]
-        };
+    fr.readAsArrayBuffer(file);
+    fr.onload = (f) => {
+      const url = "https://script.google.com/macros/s/AKfycbyR3GNAATDbPhNbU4NGaPJ4nOjnlaS0ZYoNEHDI8oTAp34XRNuUV_NAx1CT8dxzxpST/exec"; // Please set the URL of Web Apps.
 
-    fetch(`https://script.google.com/macros/s/AKfycbyI3Z_QyNLTVI8-TLkNjB3OlQksEMFryrgTrMFBTSPc-Tppa5v36iaTSIyP2NvySrQC/exec`, {
-                  method : 'POST',
-                  header : {'Content-Type': 'application/json'},
-                  body : obj
-                  });
-      };
-      fr.readAsArrayBuffer(file);
+      const qs = new URLSearchParams({
+        filename: file.name,
+        mimeType: file.type,
+      });
+      fetch(`${url}?${qs}`, {
+        method: "POST",
+        body: JSON.stringify([...new Int8Array(f.target.result)]),
+      })
+        .then((res) => res.json())
+        .then(console.log)
+        .catch(console.log);
+        };
+      }
     }
-  }
 
     function submitForm(obj){
         event.preventDefault()
