@@ -62,7 +62,7 @@
       const file = f.files[i];
       const fr = new FileReader();
     fr.readAsArrayBuffer(file);
-    fr.onload = (f) => {
+    fr.onload = (e) => {
       const url = "https://script.google.com/macros/s/AKfycbyR3GNAATDbPhNbU4NGaPJ4nOjnlaS0ZYoNEHDI8oTAp34XRNuUV_NAx1CT8dxzxpST/exec"; // Please set the URL of Web Apps.
 
       const qs = new URLSearchParams({
@@ -71,7 +71,7 @@
       });
       fetch(`${url}?${qs}`, {
         method: "POST",
-        body: JSON.stringify([...new Int8Array(f.target.result)]),
+        body: JSON.stringify([...new Int8Array(e.target.result)]),
       })
         .then((res) => res.json())
         .then(console.log)
