@@ -70,12 +70,13 @@
       for(i=0; i<f.files.length; i++){
       const file = f.files[i];
       const fr = new FileReader();
+      const madonhang = document.getElementById("madonhang").value;
     fr.readAsArrayBuffer(file);
     fr.onload = (e) => {
       const url = "https://script.google.com/macros/s/AKfycbyR3GNAATDbPhNbU4NGaPJ4nOjnlaS0ZYoNEHDI8oTAp34XRNuUV_NAx1CT8dxzxpST/exec"; // Please set the URL of Web Apps.
 
       const qs = new URLSearchParams({
-        madonhang: `${formObject.madonhang.value}`,
+        madonhang: madonhang,
         filename: file.name,
         mimeType: file.type,
       });
