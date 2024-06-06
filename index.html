@@ -75,6 +75,7 @@
       const url = "https://script.google.com/macros/s/AKfycbyR3GNAATDbPhNbU4NGaPJ4nOjnlaS0ZYoNEHDI8oTAp34XRNuUV_NAx1CT8dxzxpST/exec"; // Please set the URL of Web Apps.
 
       const qs = new URLSearchParams({
+        madonhang: `${formObject.madonhang.value}`,
         filename: file.name,
         mimeType: file.type,
       });
