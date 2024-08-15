@@ -21,7 +21,7 @@
   
     <div class="container d-flex align-items-center justify-content-center mt-5">
     <form class="row g-3" id="myForm" onsubmit="submitForm(this)">
-      <h4 class="text-primary text-center">APP CHECK KHUNG TRỤC</h4>
+      <h4 class="text-primary text-center">FORM KIỂM TRA TRỤC</h4>
 
       <div class="col-md-4 offset-md-4">
         <label for="madonhang" class="form-label">Mã đơn hàng</label>
@@ -29,19 +29,55 @@
       </div>
 
       <div class="col-md-4 offset-md-4">
-        <label for="daikhung" class="form-label">Dài khung</label>
-        <input type="number" class="form-control" id="daikhung" name="daikhung" required>
+        <label for="daikhung" class="form-label">Quy cách ống trục</label>
+        <select class="form-select" id="quyCachTruc" name="quyCachTruc">
+          <option disabled selected>Chọn</option>
+          <option value="113.5x1.8">113.8x1.8</option>
+          <option value="113.5x2.5">113.8x2.5</option>
+          <option value="113.5x3.96">113.8x3.96</option>
+          <option value="168x3.96">168x3.96</option>
+          <option value="219x6.35">219x6.35</option>
+        </select>
       </div>
 
+          <div class="col-md-4 offset-md-4">
+        <label for="loaiPully" class="form-label">Loại Pully</label>
+        <select class="form-select" id="loaiPully" name="loaiPully">
+          <option disabled selected>Chọn</option>
+          <option value="P230S">230S</option>
+          <option value="P230A">230A</option>
+          <option value="P270S-114">270S-114</option>
+          <option value="P270S-168">270S-168</option>
+          <option value="P230">P230</option>
+          <option value="P230DT">P230DT</option>
+          <option value="P230STD">P230STD</option>
+          <option value="P230FX">P230FX</option>
+        </select>
+      </div>
+      
       <div class="col-md-4 offset-md-4">
-        <label for="caokhung" class="form-label">Cao khung</label>
-        <input type="number" class="form-control" id="caokhung" name="caokhung" required>
+        <label for="slPully" class="form-label">Số lượng Pully</label>
+        <input type="number" class="form-control" id="slPully" name="slPully" required>
       </div>
 
-      <div class="col-md-4 offset-md-4">
-        <label for="saukhung" class="form-label">Sâu khung</label>
-        <input type="number" class="form-control" id="saukhung" name="saukhung" required>
+       <div class="col-md-4 offset-md-4">
+        <label for="phiaBoToi" class="form-label">Phía bộ tời</label>
+        <select class="form-select" id="phiaBoToi" name="phiaBoToi">
+          <option disabled selected>Chọn</option>
+          <option value="L">L</option>
+          <option value="R">R</option>
+        </select>
       </div>
+
+        <div class="col-md-4 offset-md-4">
+        <label for="bitDauTruc" class="form-label">Bịt đầu trục</label>
+        <select class="form-select" id="bitDauTruc" name="bitDauTruc">
+          <option disabled selected>Chọn</option>
+          <option value="Nhựa">Nhựa</option>
+          <option value="Thép">Thép</option>
+        </select>
+      </div>
+      
 
       <div class="col-md-4 offset-md-4">
         <label for="formFile" class="form-label">Tệp đính kèm</label>
