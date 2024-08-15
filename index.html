@@ -27,7 +27,12 @@
         <label for="madonhang" class="form-label">Mã đơn hàng</label>
         <input type="text" class="form-control" id="madonhang" name="madonhang" required>
       </div>
-
+      
+      <div class="col-md-4 offset-md-4">
+        <label for="formFile" class="form-label">Tệp đính kèm</label>
+        <input id="file" multiple class="form-control" type="file" onchange="saveFile(this)" required/>
+      </div>
+      
       <div class="col-md-4 offset-md-4">
         <label for="daikhung" class="form-label">Quy cách ống trục</label>
         <select class="form-select" id="quyCachTruc" name="quyCachTruc">
@@ -78,11 +83,64 @@
         </select>
       </div>
       
+        <div class="col-md-4 offset-md-4">
+        <label for="caMotor" class="form-label">Cá motor</label>
+        <input type="number" class="form-control" id="caMotor" name="caMotor" required>
+      </div>
+
+        <div class="col-md-4 offset-md-4">
+        <label for="Wcat" class="form-label">Chiều dài cắt</label>
+        <input type="number" class="form-control" id="Wcat" name="Wcat" required>
+      </div>
+
+     <div class="col-md-4 offset-md-4">
+        <label for="CLcat" class="form-label">Chất lượng cắt</label>
+        <select class="form-select" id="CLcat" name="CLcat">
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+        </select>
+      </div>
+
+       <div class="col-md-4 offset-md-4">
+        <label for="moiHan" class="form-label">Mối hàn</label>
+        <select class="form-select" id="moiHan" name="moiHan">
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+        </select>
+      </div>
 
       <div class="col-md-4 offset-md-4">
-        <label for="formFile" class="form-label">Tệp đính kèm</label>
-        <input id="file" multiple class="form-control" type="file" onchange="saveFile(this)" required/>
+        <label for="daoTruc" class="form-label">Độ đảo của trục</label>
+        <select class="form-select" id="daoTruc" name="daoTruc">
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+        </select>
       </div>
+
+          <div class="col-md-4 offset-md-4">
+        <label for="congTruc" class="form-label">Độ cong của trục</label>
+        <select class="form-select" id="congTruc" name="congTruc">
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 offset-md-4">
+        <label for="thangPully" class="form-label">Độ thẳng của Pully</label>
+        <select class="form-select" id="thangPully" name="thangPully">
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 offset-md-4">
+        <label for="vuongPully" class="form-label">Độ vuông góc của Pully</label>
+        <select class="form-select" id="vuongPully" name="vuongPully">
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+        </select>
+      </div>
+      
 
       <div class="col-md-4 offset-md-4">
         <label for="ghichu" class="form-label">Ghi chú</label>
@@ -132,9 +190,19 @@
                   method : 'POST',
                   header : {'Content-Type': 'application/json'},
                   body : `{"madonhang" : "${formObject.madonhang.value}",
-                          "daikhung" : "${formObject.daikhung.value}",
-                          "caokhung" : "${formObject.caokhung.value}",
-                          "saukhung" : "${formObject.saukhung.value}",
+                          "quyCachTruc" : "${formObject.quyCachTruc.value}",
+                          "loaiPully" : "${formObject.loaiPully.value}",
+                          "slPully" : "${formObject.slPully.value}",
+                          "phiaBoToi" : "${formObject.phiaBoToi.value}",
+                          "bitDauTruc" : "${formObject.bitDauTruc.value}",
+                          "caMotor" : "${formObject.caMotor.value}",
+                          "Wcat" : "${formObject.Wcat.value}",
+                          "CLcat" : "${formObject.CLcat.value}",
+                          "moiHan" : "${formObject.moiHan.value}",
+                          "daoTruc" : "${formObject.daoTruc.value}",
+                          "congTruc" : "${formObject.congTruc.value}",
+                          "thangPully" : "${formObject.thangPully.value}",
+                          "vuongPully" : "${formObject.vuongPully.value}",
                           "ghichu" : "${formObject.ghichu.value}",
                           "chat_id" : "${telegram.id}"
                           }`
