@@ -89,13 +89,13 @@
       </div>
 
         <div class="col-md-4 offset-md-4">
-        <label for="Wcat" class="form-label">Chiều dài cắt</label>
-        <input type="number" class="form-control" id="Wcat" name="Wcat" required>
+        <label for="wCat" class="form-label">Chiều dài cắt</label>
+        <input type="number" class="form-control" id="wCat" name="wCat" required>
       </div>
 
      <div class="col-md-4 offset-md-4">
-        <label for="CLcat" class="form-label">Chất lượng cắt</label>
-        <select class="form-select" id="CLcat" name="CLcat">
+        <label for="clCat" class="form-label">Chất lượng cắt</label>
+        <select class="form-select" id="clCat" name="clCat">
           <option value="OK">OK</option>
           <option value="NG">NG</option>
         </select>
@@ -186,7 +186,7 @@
     }
 
     function submitForm(formObject){
-    fetch(`https://script.google.com/macros/s/AKfycbyxk9qrTthKZTXJAG_EJv7uyqvtSVGSEqYFlN-XSGlDnZW7IW3vkLYv_aRwJSLqDztt4w/exec`, {
+    fetch(`https://script.google.com/macros/s/AKfycbwA9Srns9BfofT3KaLgC0qOuaYLseLyyPq6CQ33FmNJuqDcW3lVP_yHUPaWXSDw4u_w/exec`, {
                   method : 'POST',
                   header : {'Content-Type': 'application/json'},
                   body : `{"madonhang" : "${formObject.madonhang.value}",
@@ -196,8 +196,8 @@
                           "phiaBoToi" : "${formObject.phiaBoToi.value}",
                           "bitDauTruc" : "${formObject.bitDauTruc.value}",
                           "caMotor" : "${formObject.caMotor.value}",
-                          "Wcat" : "${formObject.Wcat.value}",
-                          "CLcat" : "${formObject.CLcat.value}",
+                          "wCat" : "${formObject.wCat.value}",
+                          "clCat" : "${formObject.clCat.value}",
                           "moiHan" : "${formObject.moiHan.value}",
                           "daoTruc" : "${formObject.daoTruc.value}",
                           "congTruc" : "${formObject.congTruc.value}",
