@@ -140,7 +140,14 @@
           <option value="NG">NG</option>
         </select>
       </div>
-      
+
+        <div class="col-md-4 offset-md-4">
+        <label for="sonDam" class="form-label">Sơn Dặm</label>
+        <select class="form-select" id="sonDam" name="sonDam">
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+        </select>
+      </div>
 
       <div class="col-md-4 offset-md-4">
         <label for="ghichu" class="form-label">Ghi chú</label>
@@ -203,6 +210,7 @@
                           "congTruc" : "${formObject.congTruc.value}",
                           "thangPully" : "${formObject.thangPully.value}",
                           "vuongPully" : "${formObject.vuongPully.value}",
+                          "sonDam" : "${formObject.sonDam.value}",
                           "ghichu" : "${formObject.ghichu.value}",
                           "chat_id" : "${telegram.id}"
                           }`
