@@ -17,9 +17,8 @@
 </head>
 <body>
     <div class="container d-flex align-items-center justify-content-center mt-5">
+    <form class="row g-3" id="myForm" onsubmit="submitForm(this)">
       <h4 class="text-primary text-center">Mỹ Hào thứ 6 vì môi trường Sáng-Xanh-Sạch-Đẹp</h4>
-      
-      <form id="myForm">
         <div class="row">
           
       <div class="col-md-4 offset-md-4">
@@ -38,8 +37,8 @@
         <label for="formFile" class="form-label">Tệp đính kèm</label>
         <input id="files" multiple class="form-control" type="file" required/>
       </div>
-        <div style="margin-top:16px;display:flex;gap:8px;align-items:center">
-          <button type="submit">Gửi</button>
+
+          <button type="submit" class="btn btn-primary w-100">Gửi</button>
           <span class="muted">Tệp lớn: trình duyệt phải đọc file trước khi gửi.</span>
         </div>
       </form>
