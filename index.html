@@ -73,23 +73,7 @@
     fetch(`https://script.google.com/macros/s/AKfycbwA9Srns9BfofT3KaLgC0qOuaYLseLyyPq6CQ33FmNJuqDcW3lVP_yHUPaWXSDw4u_w/exec`, {
                   method : 'POST',
                   header : {'Content-Type': 'application/json'},
-                  body : `{"madonhang" : "${formObject.madonhang.value}",
-                          "quyCachTruc" : "${formObject.quyCachTruc.value}",
-                          "loaiPully" : "${formObject.loaiPully.value}",
-                          "slPully" : "${formObject.slPully.value}",
-                          "phiaBoToi" : "${formObject.phiaBoToi.value}",
-                          "bitDauTruc" : "${formObject.bitDauTruc.value}",
-                          "caMotor" : "${formObject.caMotor.value}",
-                          "wCat" : "${formObject.wCat.value}",
-                          "clCat" : "${formObject.clCat.value}",
-                          "moiHan" : "${formObject.moiHan.value}",
-                          "daoTruc" : "${formObject.daoTruc.value}",
-                          "congTruc" : "${formObject.congTruc.value}",
-                          "thangPully" : "${formObject.thangPully.value}",
-                          "vuongPully" : "${formObject.vuongPully.value}",
-                          "sonDam" : "${formObject.sonDam.value}",
-                          "ghichu" : "${formObject.ghichu.value}",
-                          "chat_id" : "${telegram.id}"
+                  body : `{"tendonvi" : "${formObject.tendonvi.value}",
                           }`
                   });
     document.getElementById("myForm").reset();
