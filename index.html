@@ -1,85 +1,149 @@
+
 <!doctype html>
-<html lang="en">
-
+<html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tuổi trẻ Mỹ Hào</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form + Upload → Google Drive (Apps Script doPost)</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
-
-    * {
-      font-family: 'Prompt', sans-serif;
-    }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#f8fafc;color:#0f172a}
+    .wrap{max-width:760px;margin:24px auto;padding:16px}
+    .card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px}
+    label{font-size:12px;color:#64748b}
+    input,textarea{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:10px 12px}
+    textarea{min-height:120px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    button{border:0;border-radius:12px;padding:10px 14px;background:#2563eb;color:#fff;font-weight:700}
+    .fileitem{display:flex;align-items:center;gap:12px;border:1px solid #e5e7eb;border-radius:12px;padding:10px;margin-top:8px;background:#fff}
+    progress{width:100%}
+    .muted{font-size:12px;color:#64748b}
   </style>
 </head>
-
 <body>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  
-    <div class="container d-flex align-items-center justify-content-center mt-5">
-    <form class="row g-3" id="myForm" onsubmit="submitForm(this)">
-      <h4 class="text-primary text-center">BÁO CÁO HOẠT ĐỘNG T6 MỸ HÀO</h4>
+  <div class="wrap">
+    <h1 style="font-size:22px;font-weight:800;margin-bottom:12px">Form + Upload lên Google Drive (qua Apps Script)</h1>
+    <div class="card">
+      <form id="myForm">
+        <div class="row">
+          <div>
+            <label>Họ và tên</label>
+            <input name="fullName" type="text" placeholder="Nguyễn Văn A" required />
+          </div>
+          <div>
+            <label>Email</label>
+            <input name="email" type="email" placeholder="name@example.com" />
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <label>Nội dung</label>
+          <textarea name="message" placeholder="Ghi chú thêm..."></textarea>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <div>
+            <label>Folder ID (để trống = My Drive gốc)</label>
+            <input name="folderId" type="text" placeholder="1a2B3cD4..." />
+          </div>
+          <div style="display:flex;align-items:end;gap:12px">
+            <label class="muted" style="display:flex;align-items:center;gap:8px"><input name="makePublic" type="checkbox"/> Public link (bật bên server nếu muốn)</label>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <label>File đính kèm</label>
+          <input id="files" type="file" multiple required />
+        </div>
+        <div style="margin-top:16px;display:flex;gap:8px;align-items:center">
+          <button type="submit">Gửi</button>
+          <span class="muted">Tệp lớn: trình duyệt phải đọc file trước khi gửi.</span>
+        </div>
+      </form>
+    </div>
 
-            <div class="col-md-4 offset-md-4">
-        <label for="tendonvi" class="form-label">Tên đơn vị</label>
-        <select class="form-select" id="tendonvi" name="tendonvi">
-          <option disabled selected>Chọn</option>
-          <option value="Kim Huy">Kim Huy</option>
-          <option value="Hoàng Lê">Hoàng Lê</option>
-          <option value="Quan Cù">Quan Cù</option>
-          <option value="Nghĩa Trang">Nghĩa Trang</option>
-          <option value="Ngọc trì">Ngọc Trì</option>
-          <option value="Phúc Xá">Phúc Xá</option>
-          <option value="Yên Xá">Yên Xá</option>
-        </select>
-      </div>
-      
-      <div class="col-md-4 offset-md-4">
-        <label for="formFile" class="form-label">Tệp đính kèm</label>
-        <input id="file" multiple class="form-control" type="file" onchange="saveFile(this)" required/>
-      </div>
-      <div class="col-md-4 offset-md-4">
-        <button type="submit" class="btn btn-primary w-100">Gửi</button>
-      </div>
-    </form>
+    <div id="list" style="margin-top:12px"></div>
+
+    <div id="result" class="card" style="margin-top:12px; display:none"></div>
   </div>
 
   <script>
- function saveFile(f) {
-      for(i=0; i<f.files.length; i++){
-      const file = f.files[i];
-      const fr = new FileReader();
-      const tendonvi = document.getElementById("tendonvi").value;
-    fr.readAsArrayBuffer(file);
-    fr.onload = (e) => {
-      const url = "https://script.google.com/macros/s/AKfycbwm7ej6kBxhIEqVztbLi-aSfJQQ9n_ivLn6QcmyZHfOqrVjbthebGgojwDxUtj1k6PZ/exec"; // Please set the URL of Web Apps.
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwm7ej6kBxhIEqVztbLi-aSfJQQ9n_ivLn6QcmyZHfOqrVjbthebGgojwDxUtj1k6PZ/exec'; // Ví dụ: https://script.google.com/macros/s/XXXXX/exec
 
-      const qs = new URLSearchParams({
-        tendonvi: tendonvi,
-        filename: file.name,
-        mimeType: file.type,
-      });
-      fetch(`${url}?${qs}`, {
-        method: "POST",
-        body: JSON.stringify([...new Int8Array(e.target.result)]),
-      })
-        .then((res) => res.json())
-        .then(console.log)
-        .catch(console.log);
+    const fmtBytes=(b)=>{const u=['B','KB','MB','GB'];let i=0;while(b>=1024&&i<u.length-1){b/=1024;i++}return `${b.toFixed(i?1:0)} ${u[i]}`};
+
+    function toast(msg){
+      const el=document.createElement('div');
+      el.textContent=msg; el.style='position:fixed;left:50%;top:16px;transform:translateX(-50%);background:#111;color:#fff;padding:8px 12px;border-radius:12px;z-index:9999;font-size:12px';
+      document.body.appendChild(el); setTimeout(()=>el.remove(),2400);
+    }
+
+    function fileToBase64Bare(file, onProgress){
+      return new Promise((resolve,reject)=>{
+        const fr=new FileReader();
+        fr.onload=()=>{ // fr.result: data:mime;base64,XXXX
+          const s=String(fr.result); const i=s.indexOf(',');
+          resolve(s.slice(i+1)); // chỉ lấy phần base64 sau dấu phẩy
         };
+        fr.onerror=reject;
+        if (fr.onprogress!==null) fr.onprogress=(e)=>{ if(e.lengthComputable&&onProgress){ onProgress((e.loaded/e.total)*100); } };
+        fr.readAsDataURL(file);
+      });
+    }
+
+    const list = document.getElementById('list');
+    document.getElementById('myForm').addEventListener('submit', async (ev)=>{
+      ev.preventDefault();
+      const form = ev.target;
+      const files = [...document.getElementById('files').files];
+      if (!files.length) { toast('Vui lòng chọn ít nhất 1 file'); return; }
+
+      list.innerHTML='';
+      const encoded = [];
+      for (const [i,f] of files.entries()){
+        const row=document.createElement('div'); row.className='fileitem';
+        row.innerHTML=`<div style="flex:1 1 auto;min-width:0">
+            <div style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${f.name}</div>
+            <div class="muted">${f.type||'n/a'} · ${fmtBytes(f.size)}</div>
+            <progress id="per${i}" max="100" value="0" style="margin-top:6px"></progress>
+          </div>`;
+        list.appendChild(row);
+        const b64 = await fileToBase64Bare(f, p=> document.getElementById(`per${i}`).value=p);
+        encoded.push({ name:f.name, type:f.type, data:b64 });
       }
-    }
 
-    function submitForm(formObject){
-    document.getElementById("myForm").reset();
-    window.alert("Dữ liệu đang gửi lên hệ thống")
-    }
+      // Tạo FormData KHÔNG đặt Content-Type thủ công (tránh preflight/CORS)
+      const fd = new FormData();
+      fd.append('fullName', form.fullName.value.trim());
+      fd.append('email', form.email.value.trim());
+      fd.append('message', form.message.value.trim());
+      fd.append('folderId', form.folderId.value.trim());
+      fd.append('fileCount', String(encoded.length));
+      encoded.forEach((f, i)=>{
+        fd.append(`file${i}_name`, f.name);
+        fd.append(`file${i}_type`, f.type);
+        fd.append(`file${i}_data`, f.data); // base64 (bare)
+      });
 
+      const btn = form.querySelector('button[type="submit"]');
+      const old = btn.textContent; btn.textContent='Đang gửi…'; btn.disabled=true;
+      try{
+        const res = await fetch(API_URL, { method:'POST', body: fd });
+        // Một số môi trường vẫn cho đọc JSON phản hồi bình thường.
+        let data = null;
+        try { data = await res.json(); } catch(_) { /* Nếu no-cors, có thể không đọc được */ }
+
+        btn.textContent=old; btn.disabled=false;
+        document.getElementById('result').style.display='block';
+        if (data && data.ok) {
+          document.getElementById('result').innerHTML = '<b>Thành công!</b><br>' +
+            data.files.map(f=>`<div><a href="${f.url}" target="_blank">${f.name}</a> (${(f.size/1024).toFixed(1)} KB)</div>`).join('');
+          toast('✅ Đã gửi form + upload Drive');
+        } else {
+          document.getElementById('result').textContent = 'Đã gửi yêu cầu. Kiểm tra Drive của bạn.';
+          toast('ℹ️ Đã gửi yêu cầu (có thể không đọc được phản hồi do CORS)');
+        }
+      } catch(err){
+        btn.textContent=old; btn.disabled=false; console.error(err);
+        toast('❌ Lỗi mạng: '+err.message);
+      }
+    });
   </script>
-
 </body>
-
 </html>
