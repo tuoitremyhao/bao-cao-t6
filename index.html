@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Form + Upload → Google Drive (Apps Script doPost)</title>
+  <title>Tuổi trẻ Mỹ Hào</title>
   <style>
     body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#f8fafc;color:#0f172a}
     .wrap{max-width:760px;margin:24px auto;padding:16px}
@@ -21,32 +21,14 @@
 </head>
 <body>
   <div class="wrap">
-    <h1 style="font-size:22px;font-weight:800;margin-bottom:12px">Form + Upload lên Google Drive (qua Apps Script)</h1>
+    <h1 style="font-size:22px;font-weight:800;margin-bottom:12px">Báo cáo hoạt động Mỹ Hào thứ 6 vì môi trường\n Sáng-Xanh-Sạch-Đẹp</h1>
     <div class="card">
       <form id="myForm">
         <div class="row">
           <div>
-            <label>Họ và tên</label>
-            <input name="fullName" type="text" placeholder="Nguyễn Văn A" required />
+            <label>Tên đơn vị</label>
+            <input name="tendonvi" type="text" placeholder="Kim Huy" required />
           </div>
-          <div>
-            <label>Email</label>
-            <input name="email" type="email" placeholder="name@example.com" />
-          </div>
-        </div>
-        <div style="margin-top:12px">
-          <label>Nội dung</label>
-          <textarea name="message" placeholder="Ghi chú thêm..."></textarea>
-        </div>
-        <div class="row" style="margin-top:12px">
-          <div>
-            <label>Folder ID (để trống = My Drive gốc)</label>
-            <input name="folderId" type="text" placeholder="1a2B3cD4..." />
-          </div>
-          <div style="display:flex;align-items:end;gap:12px">
-            <label class="muted" style="display:flex;align-items:center;gap:8px"><input name="makePublic" type="checkbox"/> Public link (bật bên server nếu muốn)</label>
-          </div>
-        </div>
         <div style="margin-top:12px">
           <label>File đính kèm</label>
           <input id="files" type="file" multiple required />
@@ -110,10 +92,10 @@
 
       // Tạo FormData KHÔNG đặt Content-Type thủ công (tránh preflight/CORS)
       const fd = new FormData();
-      fd.append('fullName', form.fullName.value.trim());
-      fd.append('email', form.email.value.trim());
-      fd.append('message', form.message.value.trim());
-      fd.append('folderId', form.folderId.value.trim());
+      fd.append('tendonvi', form.fullName.value.trim());
+     // fd.append('email', form.email.value.trim());
+     // fd.append('message', form.message.value.trim());
+     // fd.append('folderId', form.folderId.value.trim());
       fd.append('fileCount', String(encoded.length));
       encoded.forEach((f, i)=>{
         fd.append(`file${i}_name`, f.name);
