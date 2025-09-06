@@ -48,10 +48,10 @@
       for(i=0; i<f.files.length; i++){
       const file = f.files[i];
       const fr = new FileReader();
-      const madonhang = document.getElementById("tendonvi").value;
+      const tendonvi = document.getElementById("tendonvi").value;
     fr.readAsArrayBuffer(file);
     fr.onload = (e) => {
-      const url = "https://script.google.com/macros/s/AKfycbyR3GNAATDbPhNbU4NGaPJ4nOjnlaS0ZYoNEHDI8oTAp34XRNuUV_NAx1CT8dxzxpST/exec"; // Please set the URL of Web Apps.
+      const url = "https://script.google.com/macros/s/AKfycbwm7ej6kBxhIEqVztbLi-aSfJQQ9n_ivLn6QcmyZHfOqrVjbthebGgojwDxUtj1k6PZ/exec"; // Please set the URL of Web Apps.
 
       const qs = new URLSearchParams({
         tendonvi: tendonvi,
@@ -70,12 +70,6 @@
     }
 
     function submitForm(formObject){
-    fetch(`https://script.google.com/macros/s/AKfycbwA9Srns9BfofT3KaLgC0qOuaYLseLyyPq6CQ33FmNJuqDcW3lVP_yHUPaWXSDw4u_w/exec`, {
-                  method : 'POST',
-                  header : {'Content-Type': 'application/json'},
-                  body : `{"tendonvi" : "${formObject.tendonvi.value}",
-                          }`
-                  });
     document.getElementById("myForm").reset();
     window.alert("Dữ liệu đang gửi lên hệ thống")
     }
