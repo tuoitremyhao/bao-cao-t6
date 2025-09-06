@@ -21,163 +21,40 @@
   
     <div class="container d-flex align-items-center justify-content-center mt-5">
     <form class="row g-3" id="myForm" onsubmit="submitForm(this)">
-      <h4 class="text-primary text-center">FORM KIỂM TRA TRỤC</h4>
+      <h4 class="text-primary text-center">BÁO CÁO HOẠT ĐỘNG T6 MỸ HÀO</h4>
 
-      <div class="col-md-4 offset-md-4">
-        <label for="madonhang" class="form-label">Mã đơn hàng</label>
-        <input type="text" class="form-control" id="madonhang" name="madonhang" required>
+            <div class="col-md-4 offset-md-4">
+        <label for="tendonvi" class="form-label">Tên đơn vị</label>
+        <select class="form-select" id="tendonvi" name="tendonvi">
+          <option disabled selected>Chọn</option>
+          <option value="Kim Huy">Kim Huy</option>
+          <option value="Hoàng Lê">Hoàng Lê</option>
+          <option value="Quan Cù">Quan Cù</option>
+          <option value="Nghĩa Trang">Nghĩa Trang</option>
+          <option value="Ngọc trì">Ngọc Trì</option>
+          <option value="Phúc Xá">Phúc Xá</option>
+          <option value="Yên Xá">Yên Xá</option>
+        </select>
       </div>
       
       <div class="col-md-4 offset-md-4">
         <label for="formFile" class="form-label">Tệp đính kèm</label>
         <input id="file" multiple class="form-control" type="file" onchange="saveFile(this)" required/>
       </div>
-      
-      <div class="col-md-4 offset-md-4">
-        <label for="daikhung" class="form-label">Quy cách ống trục</label>
-        <select class="form-select" id="quyCachTruc" name="quyCachTruc">
-          <option disabled selected>Chọn</option>
-          <option value="113.5x1.8">113.5x1.8</option>
-          <option value="113.5x2.5">113.5x2.5</option>
-          <option value="113.5x3.96">113.5x3.96</option>
-          <option value="168x3.96">168x3.96</option>
-          <option value="219x6.35">219x6.35</option>
-        </select>
-      </div>
 
-          <div class="col-md-4 offset-md-4">
-        <label for="loaiPully" class="form-label">Loại Pully</label>
-        <select class="form-select" id="loaiPully" name="loaiPully">
-          <option disabled selected>Chọn</option>
-          <option value="P230S">P230S</option>
-          <option value="P230A">P230A</option>
-          <option value="P270S-114">P270S-114</option>
-          <option value="P270S-168">P270S-168</option>
-          <option value="P230">P230</option>
-          <option value="P230DT">P230DT</option>
-          <option value="P230STD">P230STD</option>
-          <option value="P230FX">P230FX</option>
-        </select>
-      </div>
-      
-      <div class="col-md-4 offset-md-4">
-        <label for="slPully" class="form-label">Số lượng Pully</label>
-        <input type="number" class="form-control" id="slPully" name="slPully" required>
-      </div>
-
-       <div class="col-md-4 offset-md-4">
-        <label for="phiaBoToi" class="form-label">Phía bộ tời</label>
-        <select class="form-select" id="phiaBoToi" name="phiaBoToi">
-          <option disabled selected>Chọn</option>
-          <option value="L">L</option>
-          <option value="R">R</option>
-        </select>
-      </div>
-
-        <div class="col-md-4 offset-md-4">
-        <label for="bitDauTruc" class="form-label">Bịt đầu trục</label>
-        <select class="form-select" id="bitDauTruc" name="bitDauTruc">
-          <option disabled selected>Chọn</option>
-          <option value="Nhựa">Nhựa</option>
-          <option value="Thép">Thép</option>
-        </select>
-      </div>
-      
-        <div class="col-md-4 offset-md-4">
-        <label for="caMotor" class="form-label">Cá motor</label>
-        <input type="text" class="form-control" id="caMotor" name="caMotor" required>
-      </div>
-
-        <div class="col-md-4 offset-md-4">
-        <label for="wCat" class="form-label">Chiều dài cắt</label>
-        <input type="number" class="form-control" id="wCat" name="wCat" required>
-      </div>
-
-     <div class="col-md-4 offset-md-4">
-        <label for="clCat" class="form-label">Chất lượng cắt</label>
-        <select class="form-select" id="clCat" name="clCat">
-          <option value="OK">OK</option>
-          <option value="NG">NG</option>
-        </select>
-      </div>
-
-       <div class="col-md-4 offset-md-4">
-        <label for="moiHan" class="form-label">Mối hàn</label>
-        <select class="form-select" id="moiHan" name="moiHan">
-          <option value="OK">OK</option>
-          <option value="NG">NG</option>
-        </select>
-      </div>
-
-      <div class="col-md-4 offset-md-4">
-        <label for="daoTruc" class="form-label">Độ đảo của trục</label>
-        <select class="form-select" id="daoTruc" name="daoTruc">
-          <option value="OK">OK</option>
-          <option value="NG">NG</option>
-        </select>
-      </div>
-
-          <div class="col-md-4 offset-md-4">
-        <label for="congTruc" class="form-label">Độ cong của trục</label>
-        <select class="form-select" id="congTruc" name="congTruc">
-          <option value="OK">OK</option>
-          <option value="NG">NG</option>
-        </select>
-      </div>
-
-      <div class="col-md-4 offset-md-4">
-        <label for="thangPully" class="form-label">Độ thẳng của Pully</label>
-        <select class="form-select" id="thangPully" name="thangPully">
-          <option value="OK">OK</option>
-          <option value="NG">NG</option>
-        </select>
-      </div>
-
-      <div class="col-md-4 offset-md-4">
-        <label for="vuongPully" class="form-label">Độ vuông góc của Pully</label>
-        <select class="form-select" id="vuongPully" name="vuongPully">
-          <option value="OK">OK</option>
-          <option value="NG">NG</option>
-        </select>
-      </div>
-
-        <div class="col-md-4 offset-md-4">
-        <label for="sonDam" class="form-label">Sơn Dặm</label>
-        <select class="form-select" id="sonDam" name="sonDam">
-          <option value="OK">OK</option>
-          <option value="NG">NG</option>
-        </select>
-      </div>
-
-      <div class="col-md-4 offset-md-4">
-        <label for="ghichu" class="form-label">Ghi chú</label>
-        <input type="text" class="form-control" id="ghichu" name="ghichu" >
-      </div>
-
-      <div class="col-md-4 offset-md-4">
-        <button type="submit" class="btn btn-primary w-100">Gửi</button>
-      </div>
-    </form>
-  </div>
 
   <script>
-
-            //telegram
-    const tg = window.Telegram.WebApp.initData;
-    var tgdata = decodeURIComponent(tg.split('&')[1].substring(5));
-    var telegram = JSON.parse(tgdata);
-    
  function saveFile(f) {
       for(i=0; i<f.files.length; i++){
       const file = f.files[i];
       const fr = new FileReader();
-      const madonhang = document.getElementById("madonhang").value;
+      const madonhang = document.getElementById("tendonvi").value;
     fr.readAsArrayBuffer(file);
     fr.onload = (e) => {
       const url = "https://script.google.com/macros/s/AKfycbyR3GNAATDbPhNbU4NGaPJ4nOjnlaS0ZYoNEHDI8oTAp34XRNuUV_NAx1CT8dxzxpST/exec"; // Please set the URL of Web Apps.
 
       const qs = new URLSearchParams({
-        madonhang: madonhang,
+        tendonvi: tendonvi,
         filename: file.name,
         mimeType: file.type,
       });
@@ -217,7 +94,6 @@
                   });
     document.getElementById("myForm").reset();
     window.alert("Dữ liệu đang gửi lên hệ thống")
-    window.Telegram.WebApp.close()
     }
 
   </script>
